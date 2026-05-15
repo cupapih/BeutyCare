@@ -27,113 +27,122 @@ button,
   cursor: pointer;
 }
 
-/* Header */
+/* Header
+   Menata bar navigasi utama, logo, dan menu agar rapi.
+   Header dibuat sticky agar tetap terlihat saat menggulir halaman.
+*/
 header {
-  background: #fff;
-  padding: 18px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  position: sticky;
+  background: #fff;                 /* Latar putih untuk header */
+  padding: 18px 24px;               /* Spasi dalam header */
+  display: flex;                    /* Mengatur posisi elemen secara horizontal */
+  align-items: center;              /* Vertikal align elemen */
+  justify-content: space-between;   /* Pisahkan logo dan menu */
+  gap: 20px;                        /* Jarak antar elemen */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Bayangan halus */
+  position: sticky;                 /* Header melekat di atas saat scroll */
   top: 0;
-  z-index: 10;
+  z-index: 10;                      /* Pastikan header di atas konten lain */
 }
 .logo {
-  font-size: 28px;
-  font-weight: 800;
-  color: deeppink;
-  letter-spacing: 0.5px;
+  font-size: 28px;                  /* Ukuran teks logo */
+  font-weight: 800;                 /* Tebal font */
+  color: deeppink;                  /* Warna logo */
+  letter-spacing: 0.5px;            /* Jarak antar huruf */
 }
 nav ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  align-items: center;
+  list-style: none;                 /* Hilangkan bullet list */
+  display: flex;                    /* Tampilkan menu secara horizontal */
+  flex-wrap: wrap;                  /* Jika ruang kecil, menu bisa terbungkus */
+  gap: 18px;                        /* Jarak antar item menu */
+  align-items: center;              /* Posisi tengah vertikal */
 }
 nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 600;
-  transition: 0.2s ease;
+  text-decoration: none;            /* Hilangkan garis bawah link */
+  color: #333;                      /* Warna teks link */
+  font-weight: 600;                 /* Tebal teks link */
+  transition: 0.2s ease;            /* Animasi saat hover */
 }
 nav a:hover {
-  color: deeppink;
+  color: deeppink;                  /* Warna berubah saat kursor berada di atas */
 }
 
-/* Hero */
+/* Hero section
+   Menata tampilan bagian atas dengan gambar dan teks utama.
+   Foto dibuat responsif agar tidak terpotong di layar kecil.
+*/
 #Home {
-  padding: 80px 24px;
+  padding: 80px 24px;            /* Spasi atas/bawah dan kiri/kanan */
 }
 .home-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 40px;
+  max-width: 1200px;              /* Lebar maksimum container */
+  margin: 0 auto;                 /* Ratakan ke tengah */
+  display: flex;                  /* Susun gambar dan teks berdampingan */
+  align-items: center;            /* Rata tengah secara vertikal */
+  gap: 40px;                      /* Jarak antar kolom */
 }
 .home-image,
 .home-content {
-  flex: 1;
+  flex: 1;                        /* Masing-masing kolom mengambil ruang yang sama */
 }
 .home-image img {
-  width: 100%;
-  height: 520px;
-  object-fit: cover;
-  border-radius: 30px 0 30px 0;
-  box-shadow: 20px 20px 0 rgba(178, 172, 136, 0.2);
+  width: 100%;                    /* Lebar foto mengikuti kontainer */
+  height: auto;                   /* Tinggi menyesuaikan agar tidak terdistorsi */
+  max-height: 520px;              /* Batas tinggi untuk tampilan desktop */
+  object-fit: contain;            /* Seluruh gambar tampil tanpa terpotong */
+  border-radius: 30px 0 30px 0;   /* Sudut bergelombang untuk estetika */
+  box-shadow: 20px 20px 0 rgba(178, 172, 136, 0.2); /* Aksen bayangan di belakang gambar */
 }
 .home-content span {
-  font-size: 14px;
-  letter-spacing: 2px;
-  color: #b2ac88;
-  font-weight: 700;
+  font-size: 14px;                /* Ukuran teks kecil untuk label */
+  letter-spacing: 2px;            /* Jarak huruf agar lebih tajam */
+  color: #b2ac88;                 /* Warna aksen */
+  font-weight: 700;               /* Teks tegas */
   display: block;
   margin-bottom: 14px;
 }
 .home-content h2 {
-  font-size: 3rem;
+  font-size: 3rem;                /* Judul besar untuk fokus utama */
   color: #4a4a4a;
   line-height: 1.1;
   margin-bottom: 24px;
 }
 .home-content p {
-  font-size: 1rem;
+  font-size: 1rem;                /* Paragraf isi */
   color: #666;
   line-height: 1.8;
   margin-bottom: 32px;
-  max-width: 640px;
+  max-width: 640px;               /* Batas lebar teks agar lebih nyaman dibaca */
 }
 .btn-explore {
-  display: inline-flex;
+  display: inline-flex;           /* Tombol fleksibel */
   align-items: center;
   gap: 10px;
   padding: 14px 30px;
   background: #4a4a4a;
   color: #fff;
-  border-radius: 999px;
+  border-radius: 999px;           /* Bentuk tombol full rounded */
   text-decoration: none;
   transition: 0.3s ease;
 }
 .btn-explore:hover {
   background: #b2ac88;
-  transform: translateX(4px);
+  transform: translateX(4px);     /* Efek hover geser sedikit */
 }
 
-/* About */
+/* About section
+   Menjelaskan nilai perusahaan dan menampilkan pilar yang mendukung layanan.
+*/
 #about-us {
-  padding: 60px 24px;
+  padding: 60px 24px;            /* Spasi sekitar section */
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto;               /* Pusatkan konten */
 }
 .about-header span {
   font-size: 14px;
   letter-spacing: 2px;
   color: deeppink;
   font-weight: 800;
-  border-bottom: 2px solid deeppink;
+  border-bottom: 2px solid deeppink; /* Garis bawah untuk label */
   padding-bottom: 5px;
   display: inline-block;
   margin-bottom: 18px;
@@ -141,19 +150,19 @@ nav a:hover {
 .about-header p {
   font-size: 1rem;
   color: #555;
-  max-width: 720px;
+  max-width: 720px;             /* Lebar teks tetap nyaman dibaca */
   margin: 0 auto 40px;
   line-height: 1.7;
 }
 .about-pillars {
-  display: flex;
+  display: flex;                 /* Tampilkan pilar secara sejajar */
   gap: 20px;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap;              /* Turun menjadi kolom di layar kecil */
 }
 .pillar-item {
-  flex: 1;
-  min-width: 220px;
+  flex: 1;                       /* Setiap item berbagi ruang sama */
+  min-width: 220px;              /* Lebar minimum supaya tetap rapi */
   padding: 24px 18px;
   background: #fff;
   border-radius: 20px;
@@ -161,7 +170,7 @@ nav a:hover {
   position: relative;
 }
 .pillar-icon {
-  font-size: 40px;
+  font-size: 40px;               /* Ukuran ikon */
   color: deeppink;
   margin-bottom: 16px;
 }
@@ -183,13 +192,13 @@ nav a:hover {
   top: 20%;
   height: 60%;
   width: 1px;
-  background-color: #eee;
+  background-color: #eee;        /* Garis pemisah vertikal antar pilar */
 }
 .about-banner {
-  display: flex;
+  display: flex;                 /* Banner quote berjejer */
   align-items: center;
   gap: 24px;
-  background: #fff0f5;
+  background: #fff0f5;           /* Latar light pink */
   padding: 26px 28px;
   border-radius: 50px;
   margin-top: 40px;
@@ -205,7 +214,7 @@ nav a:hover {
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 800;
-  flex-shrink: 0;
+  flex-shrink: 0;                /* Jangan mengecil saat ruang terbatas */
 }
 .banner-text {
   font-size: 1rem;
@@ -213,30 +222,32 @@ nav a:hover {
   line-height: 1.7;
 }
 
-/* Services */
+/* Services section
+   Menampilkan pilihan layanan penggunaan produk atau treatment.
+*/
 #services {
-  padding: 60px 24px;
-  background: #f2ede4;
+  padding: 60px 24px;            /* Spasi sekitar section */
+  background: #f2ede4;            /* Latar sage lembut */
   text-align: center;
 }
 #services h2 {
-  font-size: 2rem;
+  font-size: 2rem;                /* Judul section */
   color: #4a4a4a;
   margin-bottom: 12px;
 }
 #services .subtitle {
   color: #555;
   margin-bottom: 42px;
-  max-width: 760px;
+  max-width: 760px;               /* Maksimum lebar teks penjelasan */
   margin-left: auto;
   margin-right: auto;
   font-size: 1rem;
 }
 .services-container {
-  display: flex;
+  display: flex;                  /* Susunan kotak layanan */
   justify-content: center;
   gap: 24px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;                /* Turun jadi kolom saat layar kecil */
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -244,7 +255,7 @@ nav a:hover {
   background: #fff;
   padding: 32px 24px;
   border-radius: 22px;
-  width: 280px;
+  width: 280px;                   /* Lebar tetap untuk setiap kotak */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   transition: 0.3s ease;
   display: flex;
@@ -254,11 +265,11 @@ nav a:hover {
   text-align: center;
 }
 .service-box:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px);    /* Efek hover naik sedikit */
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 .service-icon {
-  font-size: 42px;
+  font-size: 42px;                /* Ikon layanan */
 }
 .service-box h3 {
   font-size: 1.1rem;
@@ -271,10 +282,12 @@ nav a:hover {
   font-size: 0.95rem;
 }
 
-/* Produk */
+/* Product cards
+   Menata tampilan daftar produk dalam bentuk kartu responsif.
+*/
 .container-produk {
-  padding: 60px 24px;
-  background: #fdfaf6;
+  padding: 60px 24px;            /* Spasi section produk */
+  background: #fdfaf6;            /* Latar cerah */
 }
 .container-produk h2 {
   text-align: center;
@@ -283,8 +296,8 @@ nav a:hover {
   font-size: 2rem;
 }
 .produk-list {
-  list-style: none;
-  display: grid;
+  list-style: none;               /* Hapus bullet list */
+  display: grid;                  /* Grid responsif untuk kartu */
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
   padding: 0;
@@ -298,13 +311,13 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  min-height: 520px;
+  min-height: 520px;             /* Tinggi seragam untuk semua kartu */
 }
 .produk-list .card h1 {
   font-size: 1.2rem;
   color: #4a4a4a;
   margin: 0;
-  text-transform: capitalize;
+  text-transform: capitalize;     /* Judul produk huruf kapital kecil */
 }
 .produk-list .card p {
   color: #666;
@@ -313,11 +326,11 @@ nav a:hover {
 }
 .produk-list .card img {
   border-radius: 18px;
-  height: 260px;
-  object-fit: cover;
+  height: 260px;                  /* Tinggi gambar seragam */
+  object-fit: cover;              /* Menjaga proporsi gambar */
 }
 .produk-list .card button {
-  margin-top: auto;
+  margin-top: auto;               /* Tombol otomatis turun ke bawah */
   padding: 12px 28px;
   border-radius: 999px;
   background: #b2ac88;
@@ -327,14 +340,16 @@ nav a:hover {
 }
 .produk-list .card button:hover {
   background: #8d856a;
-  transform: translateY(-2px);
+  transform: translateY(-2px);     /* Efek hover tombol */
 }
 
-/* Contact */
+/* Contact section
+   Menampilkan tombol sosial dan informasi kontak di bagian akhir halaman.
+*/
 #contact {
-  padding: 60px 24px;
+  padding: 60px 24px;            /* Spasi section kontak */
   background: #fff;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #eee;     /* Garis tipis pemisah dari section sebelumnya */
   text-align: center;
 }
 #contact h2 {
@@ -345,15 +360,15 @@ nav a:hover {
 .contact-subtitle {
   color: #555;
   margin: 0 auto 34px;
-  max-width: 680px;
+  max-width: 680px;             /* Batas lebar teks agar lebih mudah dibaca */
   font-size: 1rem;
   line-height: 1.75;
 }
 .social-container {
-  display: flex;
+  display: flex;                 /* Susun tombol sosial horizontal */
   justify-content: center;
   gap: 18px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;               /* Turun jadi kolom saat layar kecil */
   margin-bottom: 32px;
 }
 .social-box {
@@ -361,7 +376,7 @@ nav a:hover {
   align-items: center;
   gap: 10px;
   padding: 14px 24px;
-  border-radius: 999px;
+  border-radius: 999px;          /* Bentuk kapsul */
   text-decoration: none;
   color: #fff;
   font-weight: 700;
@@ -373,38 +388,40 @@ nav a:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
 }
 .social-box i {
-  font-size: 1.1rem;
+  font-size: 1.1rem;             /* Ukuran ikon sosial */
 }
 .whatsapp {
-  background: #25d366;
+  background: #25d366;           /* Warna hijau WhatsApp */
 }
 .instagram {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); /* Gradasi Instagram */
 }
 .twitter {
-  background: #1da1f2;
+  background: #1da1f2;           /* Warna Twitter */
 }
 .shopee {
-  background: #ee4d2d;
+  background: #ee4d2d;           /* Warna Shopee */
 }
 .footer-text {
   color: #aaa;
   font-size: 0.92rem;
 }
 
-/* Responsive */
+/* Responsive rules
+   Aturan khusus untuk ukuran layar lebih kecil, agar tampilan tetap rapi.
+*/
 @media (max-width: 1024px) {
   .home-image img {
-    height: 420px;
+    height: 420px;              /* Sedikit kecilkan gambar di tablet */
   }
   .home-content h2 {
-    font-size: 2.4rem;
+    font-size: 2.4rem;          /* Ukuran judul disesuaikan */
   }
 }
 
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
+    flex-direction: column;      /* Susun header menjadi vertikal */
     align-items: flex-start;
     padding: 18px 20px;
   }
@@ -416,7 +433,7 @@ nav a:hover {
     padding: 40px 20px;
   }
   .home-container {
-    flex-direction: column;
+    flex-direction: column;      /* Susun hero jadi vertikal */
     text-align: center;
     gap: 30px;
   }
@@ -424,7 +441,8 @@ nav a:hover {
     font-size: 2rem;
   }
   .home-image img {
-    height: 320px;
+    width: 100%;
+    height: auto;                /* Pastikan foto ikut mengecil proporsional di mobile */
     box-shadow: none;
     border-radius: 24px;
   }
@@ -435,7 +453,7 @@ nav a:hover {
     padding: 22px;
   }
   .pillar-item:not(:last-child)::after {
-    display: none;
+    display: none;               /* Hapus garis pembatas di mobile */
   }
   .container-produk {
     padding: 40px 20px;
@@ -464,7 +482,7 @@ nav a:hover {
   .about-header p,
   .service-box p,
   .contact-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.95rem;          /* Perkecil teks agar muat di layar kecil */
   }
   .about-banner {
     padding: 18px;

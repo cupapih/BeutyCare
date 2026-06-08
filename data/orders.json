@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "produk": "Night Cream Regenerasi",
+        "produk_id": 5,
+        "harga": 110000,
+        "jumlah": 1,
+        "ongkir": 15000,
+        "total": 125000,
+        "nama": "Husein Nababilah",
+        "no_hp": "083879852282",
+        "alamat": "JL RAYA INKOPAD BLOK Q-14 NO 22",
+        "kota_tujuan": "KAB.BOGOR",
+        "kota_id": "",
+        "metode_pembayaran": "Transfer BCA",
+        "kurir": "J&T Reguler",
+        "catatan": "",
+        "resi": "123232",
+        "status": "Selesai",
+        "tanggal": "2026-05-17 18:46:56"
+    }
+]

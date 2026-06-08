@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "nama": "All Variety Beauty Products",
+    "deskripsi": "Mencerahkan serta membantu merawat kulit dari noda hitam, bopeng, dan menjaga kelembutan kulit.",
+    "harga": 85000,
+    "gambar": "img/all variety.jpg",
+    "kategori": "Skincare",
+    "tipe": "fisik"
+  },
+  {
+    "id": 2,
+    "nama": "Cushion Beauty",
+    "deskripsi": "Merawat kulit, menyamarkan noda hitam dan memberikan hasil akhir flawless serta melindungi kulit dari sinar UV.",
+    "harga": 125000,
+    "gambar": "img/jillwellington-bathroom-sink-3940726_1920.jpg",
+    "kategori": "Makeup",
+    "tipe": "fisik"
+  },
+  {
+    "id": 3,
+    "nama": "Moisturizer Pria",
+    "deskripsi": "Menjaga hidrasi kulit, mengontrol minyak berlebih, dan mencegah iritasi akibat aktivitas sehari-hari.",
+    "harga": 75000,
+    "gambar": "img/IMG-20260514-WA0013.jpg",
+    "kategori": "Skincare",
+    "tipe": "fisik"
+  },
+  {
+    "id": 4,
+    "nama": "Face Serum Vitamin C",
+    "deskripsi": "Serum pencerah dengan Vitamin C tinggi untuk mengatasi kusam, noda hitam, dan meratakan warna kulit.",
+    "harga": 95000,
+    "gambar": "img/all variety.jpg",
+    "kategori": "Serum",
+    "tipe": "fisik"
+  },
+  {
+    "id": 5,
+    "nama": "Night Cream Regenerasi",
+    "deskripsi": "Krim malam yang kaya nutrisi untuk meregenerasi kulit saat tidur, hasilkan kulit lebih kenyal dan cerah.",
+    "harga": 110000,
+    "gambar": "img/all variety.jpg",
+    "kategori": "Skincare",
+    "tipe": "fisik"
+  },
+  {
+    "id": 6,
+    "nama": "Sunscreen SPF 50 PA+++",
+    "deskripsi": "Tabir surya ringan dengan SPF 50 yang melindungi kulit dari UVA/UVB tanpa meninggalkan rasa lengket.",
+    "harga": 65000,
+    "gambar": "img/jillwellington-bathroom-sink-3940726_1920.jpg",
+    "kategori": "Skincare",
+    "tipe": "fisik"
+  },
+  {
+    "id": 7,
+    "nama": "E-Book Panduan Skincare Lengkap",
+    "deskripsi": "Panduan lengkap perawatan kulit dari dasar hingga mahir. Cocok untuk pemula yang ingin memulai skincare routine yang tepat. Format: HTML (bisa dicetak/simpan sebagai PDF).",
+    "harga": 49000,
+    "gambar": "img/digital/ebook.svg",
+    "kategori": "Digital",
+    "tipe": "ebook",
+    "file": "digital/ebook-panduan-skincare.html"
+  },
+  {
+    "id": 8,
+    "nama": "Template Planner Skincare",
+    "deskripsi": "Planner skincare harian dan mingguan yang bisa dicetak. Tracking rutinitas skincare, habit tracker, dan catatan perkembangan kulit.",
+    "harga": 29000,
+    "gambar": "img/digital/template.svg",
+    "kategori": "Digital",
+    "tipe": "template",
+    "file": "digital/template-planner-skincare.html"
+  },
+  {
+    "id": 9,
+    "nama": "15+ Resep Masker Alami",
+    "deskripsi": "Koleksi 15 resep masker wajah alami dari bahan dapur. Lengkap dengan cara membuat, manfaat, dan tips aplikasi untuk setiap jenis kulit.",
+    "harga": 35000,
+    "gambar": "img/digital/resep.svg",
+    "kategori": "Digital",
+    "tipe": "resep",
+    "file": "digital/resep-masker-alami.html"
+  },
+  {
+    "id": 10,
+    "nama": "Sertifikat Digital Perawatan Kulit",
+    "deskripsi": "Sertifikat digital eksklusif dengan nama Anda. Bukti completion treatment perawatan kulit dari BeautyCare. Customizable dengan nama penerima.",
+    "harga": 15000,
+    "gambar": "img/digital/sertifikat.svg",
+    "kategori": "Digital",
+    "tipe": "sertifikat",
+    "file": "digital/sertifikat.html"
+  },
+  {
+    "id": 11,
+    "nama": "Voucher Konsultasi Online",
+    "deskripsi": "Konsultasi 1-on-1 dengan BeautyCare Expert via WhatsApp. Dapatkan analisis tipe kulit, rekomendasi produk, dan solusi masalah kulit Anda.",
+    "harga": 25000,
+    "gambar": "img/digital/voucher.svg",
+    "kategori": "Digital",
+    "tipe": "voucher",
+    "file": "digital/voucher-konsultasi.html"
+  }
+]

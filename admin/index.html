@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <title>Admin - BeautyCare</title>
+</head>
+<body>
+
+<header class="admin-header">
+  <div class="admin-header-inner">
+    <h1><i class="fas fa-crown"></i> BeautyCare Admin</h1>
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Ke Website</a>
+  </div>
+</header>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <button class="tab-btn active" data-tab="orders">
+      <i class="fas fa-shopping-cart"></i> Pesanan
+      <span class="badge" id="order-badge">0</span>
+    </button>
+    <button class="tab-btn" data-tab="products">
+      <i class="fas fa-box"></i> Produk
+    </button>
+    <button class="tab-btn" data-tab="payment">
+      <i class="fas fa-credit-card"></i> Pembayaran
+    </button>
+    <button class="tab-btn" data-tab="digital">
+      <i class="fas fa-download"></i> Digital
+    </button>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- TAB PESANAN -->
+    <section id="tab-orders" class="tab-content active">
+      <div class="tab-header">
+        <h2>Daftar Pesanan Masuk</h2>
+      </div>
+
+      <div class="tracking-search">
+        <div class="tracking-search-inner">
+          <i class="fas fa-search-location" style="color:deeppink"></i>
+          <input type="text" id="resi-search" placeholder="Masukkan atau scan nomor resi J&T untuk cari pesanan..." onkeydown="if(event.key==='Enter'){cariPesananDariResi()}">
+          <button class="btn btn-primary" onclick="cariPesananDariResi()"><i class="fas fa-search"></i> Cari</button>
+          <button class="btn btn-secondary" onclick="scanResiSearch()" title="Scan Barcode"><i class="fas fa-camera"></i></button>
+        </div>
+        <div id="tracking-result" class="tracking-result"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tanggal</th>
+              <th>Pemesan</th>
+              <th>Produk</th>
+              <th>Jml</th>
+              <th>Ongkir</th>
+              <th>Total</th>
+              <th>No. HP</th>
+              <th>Pembayaran</th>
+              <th>Kurir</th>
+              <th>Kota</th>
+              <th>Alamat</th>
+              <th>Resi</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB PRODUK -->
+    <section id="tab-products" class="tab-content">
+      <div class="tab-header">
+        <h2>Kelola Produk</h2>
+        <button class="btn btn-primary" onclick="bukaModalProduk()"><i class="fas fa-plus"></i> Tambah Produk</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Gambar</th>
+              <th>Nama</th>
+              <th>Kategori</th>
+              <th>Harga</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="products-tbody">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB PEMBAYARAN -->
+    <section id="tab-payment" class="tab-content">
+      <div class="tab-header">
+        <h2>Pengaturan Pembayaran &amp; Ongkir</h2>
+        <button class="btn btn-primary" onclick="simpanPayment()"><i class="fas fa-save"></i> Simpan</button>
+      </div>
+
+      <div class="settings-grid">
+        <div class="settings-card">
+          <h3><i class="fas fa-university"></i> Rekening Bank</h3>
+          <p class="settings-hint">Tambahkan rekening untuk transfer pembayaran.</p>
+          <div id="bank-editor"></div>
+          <button class="btn btn-secondary btn-sm" onclick="tambahBank()"><i class="fas fa-plus"></i> Tambah Bank</button>
+        </div>
+
+        <div class="settings-card">
+          <h3><i class="fas fa-qrcode"></i> QRIS</h3>
+          <div class="form-group">
+            <label class="toggle-label">
+              <input type="checkbox" id="qris-aktif"> Aktifkan QRIS
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Path Gambar QRIS</label>
+            <input type="text" id="qris-gambar" placeholder="img/qris.jpg">
+          </div>
+          <div class="form-group">
+            <label>Atas Nama</label>
+            <input type="text" id="qris-atas-nama" placeholder="BeautyCare Official">
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <h3><i class="fab fa-whatsapp"></i> Konfirmasi WA</h3>
+          <p class="settings-hint">Nomor WhatsApp untuk konfirmasi pembayaran (termasuk kode negara, tanpa +).</p>
+          <div class="form-group">
+            <input type="text" id="wa-konfirmasi" placeholder="628123456789">
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <h3><i class="fas fa-globe"></i> RajaOngkir API</h3>
+          <p class="settings-hint">Daftar gratis di <a href="https://rajaongkir.com" target="_blank" style="color:deeppink">rajaongkir.com</a> untuk API key. Starter: JNE, POS. Pro: +J&T, SiCepat.</p>
+          <div class="form-group">
+            <label>API Key</label>
+            <input type="text" id="rajaongkir-api-key" placeholder="Masukkan API Key RajaOngkir">
+          </div>
+          <div class="form-group">
+            <label>Biteship API Key <span style="color:#e74c3c;font-size:0.75rem">(untuk cek resi)</span></label>
+            <input type="text" id="biteship-api-key" placeholder="Masukkan API Key Biteship">
+            <p style="font-size:0.75rem;color:#999;margin-top:2px">Daftar di <a href="https://biteship.com" target="_blank" style="color:deeppink">biteship.com</a> (free). Digunakan untuk cek data penerima dari nomor resi.</p>
+          </div>
+          <div class="form-group">
+            <label>Kota Asal (Origin)</label>
+            <input type="text" id="origin-city-name" readonly value="Kabupaten Bogor" style="background:#f5f3f0">
+            <p style="font-size:0.75rem;color:#999;margin-top:2px">Alamat toko: Perumahan Inkopad, Kecamatan Tajurhalang, Kab. Bogor</p>
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <h3><i class="fas fa-truck"></i> Ongkos Kirim (Fallback)</h3>
+          <p class="settings-hint">Tarif ini dipakai jika API RajaOngkir tidak tersedia atau kurir tidak didukung.</p>
+          <div id="ongkir-editor"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Modal Produk (Tambah / Edit) -->
+<div id="produkModal" class="admin-modal">
+  <div class="admin-modal-content">
+    <span class="admin-modal-close" onclick="tutupModalProduk()">&times;</span>
+    <h2 id="modal-produk-title">Tambah Produk</h2>
+    <form id="form-produk">
+      <input type="hidden" id="edit-produk-id" value="">
+
+      <label>Nama Produk *</label>
+      <input type="text" id="produk-nama" required>
+
+      <label>Kategori</label>
+      <input type="text" id="produk-kategori" placeholder="Skincare, Makeup, dll">
+
+      <label>Harga (Rp) *</label>
+      <input type="number" id="produk-harga" required min="0">
+
+      <label>Deskripsi</label>
+      <textarea id="produk-deskripsi" rows="3"></textarea>
+
+      <label>Path Gambar</label>
+      <input type="text" id="produk-gambar" placeholder="img/nama-file.jpg">
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="btn-simpan-produk">Simpan</button>
+        <button type="button" class="btn btn-secondary" onclick="tutupModalProduk()">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Scan Barcode Resi -->
+<div id="scanModal" class="admin-modal">
+  <div class="admin-modal-content">
+    <span class="admin-modal-close" onclick="tutupScan()">&times;</span>
+    <h2><i class="fas fa-camera"></i> Scan Barcode Resi J&T</h2>
+    <p style="color:#888;font-size:0.85rem;margin-bottom:14px">Arahkan kamera ke barcode pada resi J&T Express.</p>
+    <input type="hidden" id="scan-order-id" value="">
+    <div id="reader" style="width:100%;max-width:400px;margin:0 auto;border-radius:12px;overflow:hidden"></div>
+    <p id="scan-status" style="text-align:center;font-size:0.85rem;color:#888;margin:10px 0"></p>
+    <input type="text" id="scan-result" class="resi-input" placeholder="Hasil scan" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid #e0ddd8;margin-bottom:12px;box-sizing:border-box;text-align:center;font-size:1rem">
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="konfirmasiScan()" style="flex:1"><i class="fas fa-check"></i> Gunakan Resi Ini</button>
+      <button class="btn btn-secondary" onclick="tutupScan()" style="flex:1">Batal</button>
+    </div>
+  </div>
+</div>
+
+<!-- TAB DIGITAL -->
+<section id="tab-digital" class="tab-content">
+  <div class="tab-header">
+    <h2><i class="fas fa-download"></i> Produk Digital &amp; Voucher</h2>
+  </div>
+
+  <div class="tracking-search">
+    <div class="tracking-search-inner">
+      <i class="fas fa-ticket-alt" style="color:#1565c0"></i>
+      <input type="text" id="voucher-search" placeholder="Cari voucher berdasarkan kode atau nama pemesan..." onkeydown="if(event.key==='Enter'){cariVoucher()}">
+      <button class="btn btn-primary" onclick="cariVoucher()"><i class="fas fa-search"></i> Cari Voucher</button>
+      <button class="btn btn-secondary" onclick="muatSemuaVoucher()"><i class="fas fa-sync"></i> Semua</button>
+    </div>
+    <div id="voucher-result" class="tracking-result"></div>
+  </div>
+
+  <div style="background:#fff;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,0.06);padding:16px 20px;margin-bottom:16px">
+    <h3 style="margin-bottom:12px;color:#4a4a4a;font-size:1rem">Produk Digital Terdaftar</h3>
+    <div id="digital-products-list"></div>
+  </div>
+</section>
+
+<div id="toast" class="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

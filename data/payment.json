@@ -1,0 +1,31 @@
+{
+  "banks": [
+    { "nama": "BCA", "no_rek": "1234567890", "atas_nama": "BeautyCare Official" },
+    { "nama": "Mandiri", "no_rek": "9876543210", "atas_nama": "BeautyCare Official" },
+    { "nama": "BRI", "no_rek": "5556667777", "atas_nama": "BeautyCare Official" },
+    { "nama": "BNI", "no_rek": "4445556666", "atas_nama": "BeautyCare Official" }
+  ],
+  "qris": {
+    "aktif": true,
+    "gambar": "img/qris.jpg",
+    "atas_nama": "BeautyCare Official"
+  },
+  "wa_konfirmasi": "628123456789",
+  "rajaongkir_api_key": "",
+  "biteship_api_key": "",
+  "origin_city_id": 79,
+  "origin_city_name": "Kabupaten Bogor",
+  "origin_detail": "Perumahan Inkopad, Kecamatan Tajurhalang, Kab. Bogor",
+  "berat_default": 1,
+  "ongkir": {
+    "Gojek Instant": 25000,
+    "Gojek Same Day": 20000,
+    "J&T Reguler": 12000,
+    "J&T Express": 21000,
+    "SiCepat Reguler": 15000,
+    "SiCepat Halu": 11000,
+    "JNE Reguler": 13000,
+    "JNE YES": 24000,
+    "POS Indonesia": 10000
+  }
+}

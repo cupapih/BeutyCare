@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voucher Konsultasi - BeautyCare</title>
+<style>
+  @media print { @page { margin: 1cm; } body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #e8f5fe; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .voucher { max-width: 500px; width: 100%; background: #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 60px rgba(33,150,243,0.15); }
+  .voucher-top { background: linear-gradient(135deg, #2196f3, #1565c0); color: #fff; padding: 40px 30px 30px; text-align: center; }
+  .voucher-top .star { font-size: 48px; display: block; margin-bottom: 10px; }
+  .voucher-top h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: 1px; }
+  .voucher-top p { opacity: 0.85; font-size: 0.9rem; margin-top: 6px; }
+  .voucher-body { padding: 30px; text-align: center; }
+  .voucher-body .label { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+  .voucher-body .code { font-size: 2rem; font-weight: 800; letter-spacing: 6px; color: #1565c0; background: #e3f2fd; padding: 16px 20px; border-radius: 12px; display: inline-block; font-family: 'Courier New', monospace; margin-bottom: 16px; word-break: break-all; }
+  .voucher-body .info { color: #555; font-size: 0.9rem; line-height: 1.6; }
+  .voucher-body .info strong { color: #2196f3; }
+  .voucher-footer { padding: 20px 30px; background: #f5f9ff; text-align: center; border-top: 1px solid #e3f2fd; }
+  .voucher-footer .brand { font-weight: 700; color: #1565c0; }
+  .voucher-footer .terms { font-size: 0.75rem; color: #bbb; margin-top: 6px; }
+  .btn-print { display: block; margin: 16px auto 0; padding: 12px 40px; background: #2196f3; color: #fff; border: none; border-radius: 999px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  .btn-print:hover { background: #1565c0; }
+  @media print { .btn-print { display: none; } body { background: #fff; } }
+  .wa-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 12px 28px; background: #25d366; color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+  .wa-btn:hover { background: #1da851; }
+</style>
+</head>
+<body>
+
+<div class="voucher">
+  <div class="voucher-top">
+    <span class="star">&#9733;</span>
+    <h1>Voucher Konsultasi Online</h1>
+    <p>BeautyCare Official &mdash; Konsultasi 1-on-1 dengan Ahli Skincare</p>
+  </div>
+
+  <div class="voucher-body">
+    <div class="label">Kode Voucher Anda</div>
+    <div class="code" id="voucher-code">[Kode Unik]</div>
+    <div class="info">
+      <p>Gunakan kode di atas untuk konsultasi <strong>1-on-1</strong> dengan BeautyCare Expert via WhatsApp.</p>
+      <p style="margin-top:8px">Termasuk analisis tipe kulit dan rekomendasi produk yang sesuai.</p>
+    </div>
+    <a class="wa-btn" id="wa-claim" href="#" target="_blank">
+      <i class="fab fa-whatsapp"></i> Klaim via WhatsApp
+    </a>
+  </div>
+
+  <div class="voucher-footer">
+    <div class="brand">BeautyCare</div>
+    <div class="terms">Berlaku satu kali pemakaian &bull; Tidak dapat digabungkan &bull; 2026</div>
+  </div>
+</div>
+
+<button class="btn-print" onclick="window.print()" style="position:fixed;bottom:30px;left:50%;transform:translateX(-50%)">&#128424; Cetak Voucher</button>
+
+<script>
+  function generateCode(len) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < len; i++) {
+      if (i > 0 && i % 4 === 0) code += '-';
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  let code = params.get('kode');
+  if (!code) code = generateCode(12);
+  document.getElementById('voucher-code').textContent = code;
+
+  const wa = params.get('wa') || '628123456789';
+  const msg = encodeURIComponent('Halo BeautyCare, saya ingin menggunakan voucher konsultasi online.\n\nKode Voucher: ' + code + '\n\nSaya siap untuk konsultasi.');
+  document.getElementById('wa-claim').href = 'https://wa.me/' + wa + '?text=' + msg;
+</script>
+
+</body>
+</html>

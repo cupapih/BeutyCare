@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skincare Planner - BeautyCare</title>
+<style>
+  @media print { @page { margin: 1cm; } body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #faf8f5; color: #333; padding: 20px; }
+  .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border-radius: 20px; margin-bottom: 30px; }
+  .header h1 { font-size: 2rem; color: #2e7d32; }
+  .header p { color: #666; margin-top: 8px; }
+  .page { max-width: 900px; margin: 0 auto; }
+  .monthly { background: #fff; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .monthly h2 { color: #2e7d32; border-bottom: 3px solid #e8f5e9; padding-bottom: 12px; margin-bottom: 20px; font-size: 1.3rem; }
+  .daily-grid { display: grid; grid-template-columns: 80px 1fr 1fr 1fr 1fr 1fr; gap: 0; border: 2px solid #e8f5e9; border-radius: 12px; overflow: hidden; }
+  .daily-grid .header-cell { background: #2e7d32; color: #fff; padding: 10px 8px; font-weight: 600; font-size: 0.8rem; text-align: center; }
+  .daily-grid .day-cell { padding: 10px 8px; border-bottom: 1px solid #e8f5e9; font-weight: 600; background: #f1f8e9; text-align: center; font-size: 0.85rem; }
+  .daily-grid .routine-cell { padding: 8px; border-bottom: 1px solid #e8f5e9; min-height: 50px; }
+  .daily-grid .routine-cell input { width: 100%; border: 1px dashed #ccc; border-radius: 4px; padding: 4px 6px; font-size: 0.75rem; background: #fafafa; }
+  .daily-grid .routine-cell input:focus { outline: none; border-color: #4caf50; background: #fff; }
+
+  .weekly-section { background: #fff; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .weekly-section h2 { color: #2e7d32; border-bottom: 3px solid #e8f5e9; padding-bottom: 12px; margin-bottom: 20px; font-size: 1.3rem; }
+  .week-grid { display: grid; grid-template-columns: 100px 1fr; gap: 0; border: 2px solid #e8f5e9; border-radius: 12px; overflow: hidden; }
+  .week-grid .label-cell { background: #2e7d32; color: #fff; padding: 10px; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+  .week-grid .value-cell { padding: 10px; border-bottom: 1px solid #e8f5e9; }
+  .week-grid .value-cell input { width: 100%; border: 1px dashed #ccc; border-radius: 4px; padding: 6px 10px; font-size: 0.85rem; background: #fafafa; }
+  .week-grid .value-cell input:focus { outline: none; border-color: #4caf50; background: #fff; }
+
+  .product-log { background: #fff; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .product-log h2 { color: #2e7d32; border-bottom: 3px solid #e8f5e9; padding-bottom: 12px; margin-bottom: 20px; font-size: 1.3rem; }
+  .log-table { width: 100%; border-collapse: collapse; }
+  .log-table th { background: #2e7d32; color: #fff; padding: 10px 14px; text-align: left; font-size: 0.85rem; }
+  .log-table td { padding: 8px 14px; border-bottom: 1px solid #eee; }
+  .log-table td input { width: 100%; border: 1px dashed #ccc; border-radius: 4px; padding: 6px 8px; font-size: 0.8rem; background: #fafafa; }
+  .log-table td input:focus { outline: none; border-color: #4caf50; }
+
+  .tracker { background: #fff; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .tracker h2 { color: #2e7d32; border-bottom: 3px solid #e8f5e9; padding-bottom: 12px; margin-bottom: 20px; font-size: 1.3rem; }
+  .habit-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; text-align: center; }
+  .habit-grid .h-label { grid-column: 1; font-weight: 600; font-size: 0.75rem; color: #555; text-align: left; padding: 6px; display: flex; align-items: center; }
+  .habit-grid .h-day { font-weight: 600; font-size: 0.75rem; color: #2e7d32; background: #f1f8e9; padding: 6px 4px; border-radius: 4px; }
+  .habit-grid .h-check { padding: 4px; }
+  .habit-grid .h-check input { width: 20px; height: 20px; cursor: pointer; }
+
+  .notes { background: #fff; border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .notes h2 { color: #2e7d32; border-bottom: 3px solid #e8f5e9; padding-bottom: 12px; margin-bottom: 20px; font-size: 1.3rem; }
+  .notes textarea { width: 100%; min-height: 150px; border: 2px dashed #ddd; border-radius: 12px; padding: 16px; font-family: inherit; font-size: 0.9rem; resize: vertical; }
+  .notes textarea:focus { outline: none; border-color: #4caf50; }
+
+  .footer { text-align: center; padding: 20px; color: #999; font-size: 0.8rem; }
+  .print-btn { display: block; margin: 20px auto; padding: 12px 40px; background: #2e7d32; color: #fff; border: none; border-radius: 999px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  .print-btn:hover { background: #1b5e20; }
+  @media print { .print-btn { display: none; } }
+  @media (max-width: 600px) { .daily-grid { font-size: 0.7rem; } .habit-grid { grid-template-columns: repeat(5, 1fr); } }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <h1>&#127807; Skincare Planner</h1>
+    <p>Template Planner Perawatan Kulit Bulanan &mdash; BeautyCare 2026</p>
+  </div>
+
+  <button class="print-btn" onclick="window.print()">&#128424; Cetak / Simpan PDF</button>
+
+  <div class="monthly">
+    <h2>&#128197; Tracker Harian &mdash; Minggu 1</h2>
+    <div class="daily-grid">
+      <div class="header-cell">Hari</div>
+      <div class="header-cell">Senin</div>
+      <div class="header-cell">Selasa</div>
+      <div class="header-cell">Rabu</div>
+      <div class="header-cell">Kamis</div>
+      <div class="header-cell">Jumat</div>
+      <div class="day-cell">Pagi</div>
+      <div class="routine-cell"><input placeholder="Produk pagi..."></div>
+      <div class="routine-cell"><input placeholder="Produk pagi..."></div>
+      <div class="routine-cell"><input placeholder="Produk pagi..."></div>
+      <div class="routine-cell"><input placeholder="Produk pagi..."></div>
+      <div class="routine-cell"><input placeholder="Produk pagi..."></div>
+      <div class="day-cell">Malam</div>
+      <div class="routine-cell"><input placeholder="Produk malam..."></div>
+      <div class="routine-cell"><input placeholder="Produk malam..."></div>
+      <div class="routine-cell"><input placeholder="Produk malam..."></div>
+      <div class="routine-cell"><input placeholder="Produk malam..."></div>
+      <div class="routine-cell"><input placeholder="Produk malam..."></div>
+      <div class="day-cell">Catatan</div>
+      <div class="routine-cell"><input placeholder="Kondisi kulit..."></div>
+      <div class="routine-cell"><input placeholder="Kondisi kulit..."></div>
+      <div class="routine-cell"><input placeholder="Kondisi kulit..."></div>
+      <div class="routine-cell"><input placeholder="Kondisi kulit..."></div>
+      <div class="routine-cell"><input placeholder="Kondisi kulit..."></div>
+    </div>
+  </div>
+
+  <div class="weekly-section">
+    <h2>&#128221; Jadwal Eksfoliasi &amp; Treatment Mingguan</h2>
+    <div class="week-grid">
+      <div class="label-cell">Eksfoliasi (AHA/BHA)</div>
+      <div class="value-cell"><input placeholder="Contoh: Selasa &amp; Jumat malam"></div>
+      <div class="label-cell">Retinol</div>
+      <div class="value-cell"><input placeholder="Contoh: Rabu &amp; Sabtu malam"></div>
+      <div class="label-cell">Sheet Mask</div>
+      <div class="value-cell"><input placeholder="Contoh: Minggu pagi"></div>
+      <div class="label-cell">Clay Mask</div>
+      <div class="value-cell"><input placeholder="Contoh: Kamis malam"></div>
+      <div class="label-cell">Facial Treatment</div>
+      <div class="value-cell"><input placeholder="Jadwal facial atau treatment"></div>
+    </div>
+  </div>
+
+  <div class="product-log">
+    <h2>&#128722; Log Produk</h2>
+    <table class="log-table">
+      <tr><th>Nama Produk</th><th>Jenis</th><th>Tanggal Mulai</th><th>Kesan</th></tr>
+      <tr><td><input placeholder="Nama produk..."></td><td><input placeholder="Serum/Pelembab/dll"></td><td><input placeholder="DD/MM/YYYY"></td><td><input placeholder="Baik/iritasi/dll"></td></tr>
+      <tr><td><input placeholder="Nama produk..."></td><td><input placeholder="Serum/Pelembab/dll"></td><td><input placeholder="DD/MM/YYYY"></td><td><input placeholder="Baik/iritasi/dll"></td></tr>
+      <tr><td><input placeholder="Nama produk..."></td><td><input placeholder="Serum/Pelembab/dll"></td><td><input placeholder="DD/MM/YYYY"></td><td><input placeholder="Baik/iritasi/dll"></td></tr>
+      <tr><td><input placeholder="Nama produk..."></td><td><input placeholder="Serum/Pelembab/dll"></td><td><input placeholder="DD/MM/YYYY"></td><td><input placeholder="Baik/iritasi/dll"></td></tr>
+    </table>
+  </div>
+
+  <div class="tracker">
+    <h2>&#9989; Habit Tracker Mingguan</h2>
+    <div class="habit-grid">
+      <div class="h-label">Minum Air</div>
+      <div class="h-day">Sen</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sel</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Rab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Kam</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Jum</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Min</div><div class="h-check"><input type="checkbox"></div>
+
+      <div class="h-label">SPF</div>
+      <div class="h-day">Sen</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sel</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Rab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Kam</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Jum</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Min</div><div class="h-check"><input type="checkbox"></div>
+
+      <div class="h-label">Double Cleanse</div>
+      <div class="h-day">Sen</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sel</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Rab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Kam</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Jum</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Min</div><div class="h-check"><input type="checkbox"></div>
+
+      <div class="h-label">Tidur 7-8 Jam</div>
+      <div class="h-day">Sen</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sel</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Rab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Kam</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Jum</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Sab</div><div class="h-check"><input type="checkbox"></div>
+      <div class="h-day">Min</div><div class="h-check"><input type="checkbox"></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h2>&#128221; Catatan Kulit</h2>
+    <textarea placeholder="Catat perkembangan kulit Anda setiap minggu. Contoh:&#10;- Jerawat mulai berkurang&#10;- Kulit terasa lebih lembab&#10;- Noda hitam mulai memudar&#10;- Produk baru yang dicoba..."></textarea>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2026 BeautyCare Official &mdash; Template ini dapat dicetak dan digunakan berulang kali</p>
+  </div>
+</div>
+
+</body>
+</html>

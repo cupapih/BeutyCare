@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sertifikat - BeautyCare</title>
+<style>
+  @media print { @page { margin: 0; size: landscape; } body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; background: #f0ebe3; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+  .certificate { width: 900px; max-width: 100%; background: #fff; padding: 50px 60px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); border-radius: 20px; position: relative; }
+  .certificate::before { content: ''; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 3px solid #ff69b4; border-radius: 12px; pointer-events: none; }
+  .certificate::after { content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px; border: 1.5px solid #ff69b4; border-radius: 8px; pointer-events: none; opacity: 0.5; }
+  .corner { position: absolute; font-size: 40px; color: #ff69b4; opacity: 0.2; }
+  .corner-tl { top: 30px; left: 35px; }
+  .corner-tr { top: 30px; right: 35px; }
+  .corner-bl { bottom: 30px; left: 35px; }
+  .corner-br { bottom: 30px; right: 35px; }
+  .header { text-align: center; margin-bottom: 20px; position: relative; z-index: 1; }
+  .header .icon { font-size: 50px; display: block; margin-bottom: 10px; }
+  .header h1 { font-size: 2.8rem; color: #ff69b4; letter-spacing: 4px; font-weight: 800; text-transform: uppercase; }
+  .header .subtitle { font-size: 0.9rem; color: #999; letter-spacing: 6px; text-transform: uppercase; margin-top: 4px; }
+  .divider { width: 200px; height: 2px; background: linear-gradient(90deg, transparent, #ff69b4, transparent); margin: 20px auto; }
+  .body-text { text-align: center; margin: 20px 0; position: relative; z-index: 1; }
+  .body-text p { font-size: 1.1rem; color: #666; margin-bottom: 8px; }
+  .body-text .name { font-size: 2.2rem; font-weight: 700; color: #4a1a2a; margin: 12px 0; padding: 10px 30px; display: inline-block; border-bottom: 3px solid #ff69b4; }
+  .body-text .detail { font-size: 1rem; color: #555; margin-top: 12px; }
+  .body-text .desc { font-size: 0.95rem; color: #888; max-width: 500px; margin: 16px auto 0; line-height: 1.6; }
+  .footer-cert { display: flex; justify-content: space-between; align-items: end; margin-top: 40px; position: relative; z-index: 1; }
+  .footer-cert .left, .footer-cert .right { text-align: center; }
+  .footer-cert .sign-line { width: 180px; height: 1px; background: #333; margin: 4px auto 6px; }
+  .footer-cert .sign-label { font-size: 0.8rem; color: #999; }
+  .footer-cert .brand { font-size: 1.2rem; font-weight: 700; color: #ff69b4; }
+  .footer-cert .date { font-size: 0.85rem; color: #888; margin-top: 4px; }
+  .no-print { text-align: center; margin-top: 20px; }
+  .no-print button { padding: 12px 40px; background: #ff69b4; color: #fff; border: none; border-radius: 999px; font-size: 1rem; cursor: pointer; }
+  .no-print button:hover { background: #d4589a; }
+  @media print { .no-print { display: none; } body { background: #fff; padding: 0; } .certificate { box-shadow: none; padding: 40px 50px; } }
+</style>
+</head>
+<body>
+
+<div class="certificate">
+  <span class="corner corner-tl">&#10022;</span>
+  <span class="corner corner-tr">&#10022;</span>
+  <span class="corner corner-bl">&#10022;</span>
+  <span class="corner corner-br">&#10022;</span>
+
+  <div class="header">
+    <span class="icon">&#127800;</span>
+    <h1>Sertifikat</h1>
+    <div class="subtitle">Certificate of Completion</div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="body-text">
+    <p>Dengan ini diberikan kepada</p>
+    <div class="name" id="cert-name">[Nama Pelanggan]</div>
+    <p class="detail">telah menyelesaikan</p>
+    <p class="detail" style="font-weight:600;color:#4a1a2a;font-size:1.2rem" id="cert-treatment">Skincare Treatment &amp; Perawatan Kulit</p>
+    <p class="desc">Atas dedikasi dan komitmen dalam merawat kesehatan kulit. Sertifikat ini diberikan sebagai bentuk apresiasi dari BeautyCare.</p>
+  </div>
+
+  <div class="footer-cert">
+    <div class="left">
+      <div class="sign-line"></div>
+      <div class="sign-label">Penerima</div>
+    </div>
+    <div class="right">
+      <div class="brand">BeautyCare</div>
+      <div class="date" id="cert-date">2026</div>
+      <div class="sign-label" style="margin-top:4px">Official</div>
+    </div>
+  </div>
+</div>
+
+<div class="no-print" style="position:relative;z-index:1">
+  <button onclick="window.print()">&#128424; Cetak Sertifikat</button>
+  <p style="margin-top:8px;font-size:0.85rem;color:#999">Nama akan otomatis terisi dari data pemesanan Anda</p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('nama')) {
+    document.getElementById('cert-name').textContent = params.get('nama');
+  }
+  if (params.get('treatment')) {
+    document.getElementById('cert-treatment').textContent = params.get('treatment');
+  }
+  const now = new Date();
+  document.getElementById('cert-date').textContent = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+</script>
+
+</body>
+</html>

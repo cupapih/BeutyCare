@@ -1,0 +1,2 @@
+Letakkan file gambar QRIS Anda di folder ini dengan nama qris.jpg
+Atau upload gambar QRIS melalui admin panel (Pengaturan Pembayaran).

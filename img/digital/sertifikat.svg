@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" rx="20" fill="#fff0f5"/>
+  <rect x="25" y="25" width="350" height="350" rx="15" fill="none" stroke="#ff69b4" stroke-width="3"/>
+  <rect x="35" y="35" width="330" height="330" rx="12" fill="none" stroke="#ff69b4" stroke-width="1.5" stroke-dasharray="8,4"/>
+  <text x="200" y="100" text-anchor="middle" font-size="24" fill="#ff69b4" font-weight="bold">CERTIFICATE</text>
+  <text x="200" y="140" text-anchor="middle" font-size="10" fill="#999">OF COMPLETION</text>
+  <text x="200" y="200" text-anchor="middle" font-size="13" fill="#555">This certifies that</text>
+  <rect x="100" y="215" width="200" height="30" rx="4" fill="#fce4ec"/>
+  <text x="200" y="235" text-anchor="middle" font-size="16" fill="#ff69b4" font-weight="bold">[Nama Pelanggan]</text>
+  <text x="200" y="270" text-anchor="middle" font-size="11" fill="#555">has successfully completed</text>
+  <text x="200" y="290" text-anchor="middle" font-size="12" fill="#333">Skincare Treatment</text>
+  <text x="80" y="340" font-size="9" fill="#999">BeautyCare Official</text>
+  <text x="320" y="340" text-anchor="end" font-size="9" fill="#999">2026</text>
+</svg>

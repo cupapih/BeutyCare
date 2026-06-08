@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" rx="20" fill="#fff8e1"/>
+  <rect x="50" y="30" width="300" height="340" rx="15" fill="#fff" stroke="#ffcc02" stroke-width="2"/>
+  <circle cx="200" cy="80" r="30" fill="#fff8e1" stroke="#ffcc02" stroke-width="2"/>
+  <text x="200" y="86" text-anchor="middle" font-size="28">🌿</text>
+  <text x="200" y="130" text-anchor="middle" font-size="16" fill="#e65100" font-weight="bold">RESEP MASKER ALAMI</text>
+  <circle cx="80" cy="170" r="5" fill="#4caf50"/>
+  <text x="95" y="174" font-size="12" fill="#555">Masker Oatmeal &amp; Madu</text>
+  <circle cx="80" cy="200" r="5" fill="#4caf50"/>
+  <text x="95" y="204" font-size="12" fill="#555">Masker Kunyit &amp; Yogurt</text>
+  <circle cx="80" cy="230" r="5" fill="#4caf50"/>
+  <text x="95" y="234" font-size="12" fill="#555">Masker Lidah Buaya</text>
+  <circle cx="80" cy="260" r="5" fill="#4caf50"/>
+  <text x="95" y="264" font-size="12" fill="#555">Masker Pepaya &amp; Lemon</text>
+  <circle cx="80" cy="290" r="5" fill="#4caf50"/>
+  <text x="95" y="294" font-size="12" fill="#555">Masker Putih Telur</text>
+  <text x="200" y="340" text-anchor="middle" font-size="10" fill="#999">15+ Resep Masker Alami</text>
+</svg>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Akun Saya - BeautyCare</title>
+  <style>
+    .account-page { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
+    .account-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .account-header h1 { font-size: 1.5rem; color: #4a4a4a; }
+    .user-info { background: #fff; padding: 18px 22px; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+    .user-avatar { width: 48px; height: 48px; border-radius: 50%; background: deeppink; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; }
+    .user-details { flex: 1; }
+    .user-details strong { display: block; font-size: 1.05rem; }
+    .user-details span { font-size: 0.85rem; color: #888; }
+    .order-card { background: #fff; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); margin-bottom: 16px; overflow: hidden; }
+    .order-card-header { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0ece6; flex-wrap: wrap; gap: 8px; }
+    .order-id { font-weight: 700; color: #4a4a4a; }
+    .order-date { font-size: 0.8rem; color: #999; }
+    .order-card-body { padding: 16px 20px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .order-produk { flex: 1; min-width: 150px; }
+    .order-produk h3 { font-size: 1rem; margin-bottom: 4px; }
+    .order-produk p { font-size: 0.85rem; color: #888; }
+    .order-rincian { text-align: right; min-width: 140px; }
+    .order-rincian .harga { font-weight: 700; color: deeppink; font-size: 1.1rem; }
+    .order-rincian .qty { font-size: 0.85rem; color: #888; }
+    .order-card-footer { padding: 12px 20px; background: #faf8f5; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .resi-box { display: flex; align-items: center; gap: 8px; }
+    .resi-box span { font-size: 0.8rem; color: #888; }
+    .resi-box .resi-num { font-weight: 700; color: #4a4a4a; letter-spacing: 0.5px; }
+    .track-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: deeppink; color: #fff; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: 0.2s; }
+    .track-btn:hover { background: #c0006e; }
+    .status-badge { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .no-orders { text-align: center; padding: 60px 20px; color: #999; }
+    .no-orders i { font-size: 3rem; margin-bottom: 12px; color: #ddd; }
+    .btn-logout { padding: 8px 20px; border-radius: 999px; border: 1.5px solid #e0ddd8; background: #fff; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+    .btn-logout:hover { border-color: deeppink; color: deeppink; }
+    .login-prompt { text-align: center; padding: 60px 20px; }
+    .login-prompt h2 { margin-bottom: 12px; color: #4a4a4a; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">BeautyCare</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="account.html" style="color:deeppink;font-weight:700">Akun Saya</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="account-page" id="account-page"></div>
+
+<script>
+const API_ORDERS = 'api/orders.php';
+const API_AUTH = 'api/auth.php';
+const API_DIGITAL = 'api/digital.php';
+
+function getToken() { return localStorage.getItem('bcare_token'); }
+function getUser() {
+  const raw = localStorage.getItem('bcare_user');
+  return raw ? JSON.parse(raw) : null;
+}
+
+function formatRupiah(n) {
+  return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function statusBadge(s) {
+  const colors = {
+    'Menunggu': 'background:#fff3cd;color:#856404',
+    'Diproses': 'background:#cce5ff;color:#004085',
+    'Dikirim': 'background:#d4edda;color:#155724',
+    'Selesai': 'background:#d4edda;color:#155724',
+    'Ditolak': 'background:#f8d7da;color:#721c24'
+  };
+  return `<span class="status-badge" style="${colors[s] || ''}">${s}</span>`;
+}
+
+async function loadOrders() {
+  const page = document.getElementById('account-page');
+  const user = getUser();
+  const token = getToken();
+
+  if (!user || !token) {
+    page.innerHTML = `
+      <div class="login-prompt">
+        <i class="fas fa-user-circle" style="font-size:4rem;color:#ddd;margin-bottom:16px;display:block"></i>
+        <h2>Silakan Login</h2>
+        <p style="color:#888;margin-bottom:20px">Login untuk melihat pesanan dan tracking pengiriman Anda.</p>
+        <a href="login.html" class="btn-pesan" style="display:inline-block;padding:12px 40px;text-decoration:none">Login</a>
+        <p style="margin-top:12px;font-size:0.85rem">Belum punya akun? <a href="register.html" style="color:deeppink">Daftar</a></p>
+      </div>`;
+    return;
+  }
+
+  page.innerHTML = '<p style="text-align:center;padding:40px;color:#999">Memuat pesanan...</p>';
+
+  try {
+    const res = await fetch(API_ORDERS + '?user_id=' + user.id);
+    const orders = await res.json();
+
+    page.innerHTML = `
+      <div class="account-header">
+        <h1><i class="fas fa-box"></i> Pesanan Saya</h1>
+        <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+      <div class="user-info">
+        <div class="user-avatar">${user.nama.charAt(0).toUpperCase()}</div>
+        <div class="user-details">
+          <strong>${user.nama}</strong>
+          <span>${user.email}</span>
+        </div>
+      </div>
+      ${orders.length === 0 ? `
+        <div class="no-orders">
+          <i class="fas fa-shopping-bag"></i>
+          <p>Belum ada pesanan.</p>
+          <a href="index.html" class="btn-pesan" style="display:inline-block;margin-top:12px;padding:10px 28px;text-decoration:none">Belanja Sekarang</a>
+        </div>
+      ` : orders.map(o => {
+        const statusClass = 'status-' + o.status.toLowerCase().replace(/ /g, '-');
+        const jntTrack = o.resi ? 'https://www.jet.co.id/tracking/' + o.resi : '#';
+        const isDigital = o.kurir === '-' || o.kota_tujuan === '-' || o.alamat === '-';
+        return `
+        <div class="order-card">
+          <div class="order-card-header">
+            <div>
+              <span class="order-id">#${o.id}</span>
+              <span class="order-date">${o.tanggal || '-'}</span>
+              ${isDigital ? '<span style="margin-left:8px;font-size:0.7rem;color:#1565c0;background:#e3f2fd;padding:2px 10px;border-radius:999px"><i class="fas fa-download"></i> Digital</span>' : ''}
+            </div>
+            ${statusBadge(o.status)}
+          </div>
+          <div class="order-card-body">
+            <div class="order-produk">
+              <h3>${o.produk}</h3>
+              ${isDigital ? '<p style="color:#1565c0"><i class="fas fa-download"></i> Produk Digital</p>' : `<p>Kurir: ${o.kurir || 'J&T Reguler'} | ${o.kota_tujuan || ''}</p>`}
+              ${o.catatan ? '<p style="font-style:italic;color:#999">Catatan: ' + o.catatan + '</p>' : ''}
+            </div>
+            <div class="order-rincian">
+              <div class="harga">${formatRupiah(o.total || o.harga * o.jumlah)}</div>
+              <div class="qty">${o.jumlah} x ${formatRupiah(o.harga)}</div>
+            </div>
+          </div>
+          <div class="order-card-footer">
+            ${isDigital && (o.status === 'Diproses' || o.status === 'Dikirim' || o.status === 'Selesai') ? `
+              <a href="${API_DIGITAL}?action=view&id=${o.produk_id}&order_id=${o.id}&user_id=${o.user_id}" target="_blank" class="track-btn" style="background:#1565c0"><i class="fas fa-eye"></i> Lihat Produk Digital</a>
+            ` : ''}
+            ${!isDigital ? `
+            <div class="resi-box">
+              ${o.resi ? `<span>No. Resi:</span><span class="resi-num">${o.resi}</span>` : '<span style="color:#999">Resi: -</span>'}
+            </div>
+            ${o.resi ? `<a href="${jntTrack}" target="_blank" class="track-btn"><i class="fas fa-search-location"></i> Lacak Paket</a>` : '<span style="font-size:0.8rem;color:#bbb">Menunggu resi</span>'}
+            ` : ''}
+          </div>
+        </div>`;
+      }).join('')}`;
+  } catch {
+    page.innerHTML = '<p style="text-align:center;padding:40px;color:#e74c3c">Gagal memuat pesanan.</p>';
+  }
+}
+
+function logout() {
+  const token = getToken();
+  if (token) {
+    fetch(API_AUTH + '?action=logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    }).catch(() => {});
+  }
+  localStorage.removeItem('bcare_token');
+  localStorage.removeItem('bcare_user');
+  loadOrders();
+}
+
+loadOrders();
+</script>
+</body>
+</html>

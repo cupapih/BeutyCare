@@ -91,6 +91,17 @@ nav a:hover {
   object-fit: contain;            /* Seluruh gambar tampil tanpa terpotong */
   border-radius: 30px 0 30px 0;   /* Sudut bergelombang untuk estetika */
   box-shadow: 20px 20px 0 rgba(178, 172, 136, 0.2); /* Aksen bayangan di belakang gambar */
+  animation: slideRight 3s ease-out forwards;
+}
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%); /* mulai dari luar layar kiri */
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0); /* posisi normal */
+    opacity: 1;
+  }
 }
 .home-content span {
   font-size: 14px;                /* Ukuran teks kecil untuk label */
